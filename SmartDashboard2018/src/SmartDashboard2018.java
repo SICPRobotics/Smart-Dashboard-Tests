@@ -10,6 +10,7 @@ public class SmartDashboard2018 {
 	
 	private int locationValue;
 	private final String[] ALLIANCE = {"BLUE", "RED"};
+	private String fms = "RLR";
 	
 	private double nkP = 0;
 	private double nkI = 0;
@@ -39,6 +40,9 @@ public class SmartDashboard2018 {
 	private JLabel gyro = new JLabel();
 	private JLabel pidLabel = new JLabel();
 	private JLabel fieldElementsDisplay = new JLabel();
+	private JLabel cSwitch = new JLabel();
+	private JLabel scale = new JLabel();
+	private JLabel fSwitch = new JLabel();
 	
 	private JTextField gyroShow = new JTextField();
 	
@@ -118,22 +122,7 @@ public class SmartDashboard2018 {
 		        }
 		    }
 		});
-		alliance.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					String allianceSelect = (String) alliance.getSelectedItem();
-					
-					if(allianceSelect.equals("BLUE")) {
-						
-					}
-					else if(allianceSelect.equals("RED")) {
-						
-					}
-				
-				}
-			
-			});
+		
 		
 		infoPanel.setBounds(15, 135, 460, 560);
 		infoPanel.setLayout(null);
@@ -157,21 +146,33 @@ public class SmartDashboard2018 {
 		infoPanel.add(scaleR);
 		infoPanel.add(fSwitchL);
 		infoPanel.add(fSwitchR);
+		infoPanel.add(cSwitch);
+		infoPanel.add(scale);
+		infoPanel.add(fSwitch);
 		
 		fieldElementsDisplay.setBounds(15, 335, 110, 20);
 		fieldElementsDisplay.setText("Field Elements");
 		fieldElementsDisplay.setBorder(BorderFactory.createRaisedBevelBorder());
 		
-		alliance.setBounds(125, 335, 110, 20);
+		alliance.setBounds(130, 335, 110, 20);
 		
 		fSwitchL.setBounds(15, 360, 50, 50);
 		fSwitchR.setBounds(75, 360, 50, 50);
+		fSwitch.setBounds(130, 360, 110, 50);
+		fSwitch.setBorder(BorderFactory.createRaisedBevelBorder());
+		fSwitch.setText("Other Switch");
 		
 		cSwitchL.setBounds(15, 480, 50, 50);
 		cSwitchR.setBounds(75, 480, 50, 50);
+		cSwitch.setBounds(130, 480, 110, 50);
+		cSwitch.setBorder(BorderFactory.createRaisedBevelBorder());
+		cSwitch.setText("Your Switch");
 		
 		scaleL.setBounds(15, 420, 50, 50);
 		scaleR.setBounds(75, 420, 50, 50);
+		scale.setBounds(130, 420, 110, 50);
+		scale.setBorder(BorderFactory.createRaisedBevelBorder());
+		scale.setText("Scale");
 		
 		gyro.setBounds(15, 185, 100, 20);
 		gyro.setText("Gyro");
@@ -203,7 +204,7 @@ public class SmartDashboard2018 {
 		kD.setBackground(new Color(244, 209, 170));
 		
 		encoderL.setBounds(15, 20, 100, 25);
-		encoderL.setText("Encoder Left A");
+		encoderL.setText("Left Encoder");
 		encoderL.setBorder(BorderFactory.createRaisedBevelBorder());
 		eL.setBounds(15, 45, 100, 50);
 		eL.setBackground(new Color(244, 209, 170));
@@ -212,7 +213,7 @@ public class SmartDashboard2018 {
 		
 		
 		encoderR.setBounds(125, 20, 100, 25);
-		encoderR.setText("Encoder Left B");
+		encoderR.setText("Right Encoder");
 		encoderR.setBorder(BorderFactory.createRaisedBevelBorder());
 		eR.setBounds(125, 45, 100, 50);
 		eR.setBackground(new Color(244, 209, 170));
@@ -281,8 +282,67 @@ public class SmartDashboard2018 {
 			return 0;
 		}
 	}
+	public void setFieldDataDisplay(String fmsData) {
+		
+		fms = fmsData;
+		
+	}
 	public void update(){
 
+		String allianceSelect = (String) alliance.getSelectedItem();
+		
+		if(allianceSelect.equals("BLUE")) {
+			if(fms.charAt(0) == 'L') {
+				cSwitchL.setBackground(Color.BLUE);
+				cSwitchR.setBackground(Color.RED);
+			}
+			else {
+				cSwitchL.setBackground(Color.RED);
+				cSwitchR.setBackground(Color.BLUE);
+			}
+			if(fms.charAt(1) == 'L') {
+				scaleL.setBackground(Color.BLUE);
+				scaleR.setBackground(Color.RED);
+			}
+			else {
+				scaleL.setBackground(Color.RED);
+				scaleR.setBackground(Color.BLUE);
+			}
+			if(fms.charAt(2) == 'L') {
+				fSwitchL.setBackground(Color.BLUE);
+				fSwitchR.setBackground(Color.RED);
+			}
+			else {
+				fSwitchL.setBackground(Color.RED);
+				fSwitchR.setBackground(Color.BLUE);
+			}
+		}
+		else if(allianceSelect.equals("RED")) {
+			if(fms.charAt(0) == 'L') {
+				cSwitchL.setBackground(Color.RED);
+				cSwitchR.setBackground(Color.BLUE);
+			}
+			else {
+				cSwitchL.setBackground(Color.BLUE);
+				cSwitchR.setBackground(Color.RED);
+			}
+			if(fms.charAt(1) == 'L') {
+				scaleL.setBackground(Color.RED);
+				scaleR.setBackground(Color.BLUE);
+			}
+			else {
+				scaleL.setBackground(Color.BLUE);
+				scaleR.setBackground(Color.RED);
+			}
+			if(fms.charAt(2) == 'L') {
+				fSwitchL.setBackground(Color.RED);
+				fSwitchR.setBackground(Color.BLUE);
+			}
+			else {
+				fSwitchL.setBackground(Color.BLUE);
+				fSwitchR.setBackground(Color.RED);
+			}
+		}
 		
 	}
 	//camera feedback, sensors
